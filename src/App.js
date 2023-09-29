@@ -3,9 +3,12 @@ import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      little-lemon
-    </div>
+    <React.Fragment>
+      <header></header>
+      <nav></nav>
+      <main></main>
+      <footer></footer>
+    </React.Fragment>
   );
 }
 
