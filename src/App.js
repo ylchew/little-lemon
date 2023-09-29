@@ -1,17 +1,18 @@
+import { Fragment } from "react";
 import './App.css';
-import Header from './Header.js'
-import Nav from './Nav.js'
-import Main from './Main.js'
-import Footer from './Footer.js'
+import Header from './Header'
+import Nav from './Nav'
+import Main from './Main'
+import Footer from './Footer'
 
 function App() {
   return (
-    <React.Fragment>
+    <Fragment>
       <Header></Header>
       <Nav></Nav>
       <Main></Main>
       <Footer></Footer>
-    </React.Fragment>
+    </Fragment>
   );
 }
 

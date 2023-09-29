@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Markazi+Text:wght@400;500;600;700&display=swap');
 
+:root {
+  --green: #495e57;
+  --yellow: #f4ce14;
+}
+
 .karla {
   font-family: 'Karla', sans-serif;
 }
@@ -21,3 +26,61 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+ul, li {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+.booking-form {
+  padding: 16px;
+  border-radius: 16px;
+  box-shadow: 0 8px 16px -4px #0002;
+  display: grid;
+  max-width: 300px;
+  grid-template-columns: auto auto;
+  gap: 16px;
+}
+
+  .booking-form > div {
+    display: grid;
+    gap: 8px;
+  }
+
+.booking-form label {
+  font-family: karla;
+  font-size:16px;
+  line-height:1.5;
+  font-weight: medium;
+}
+
+.booking-form input {
+  line-height: 36px;
+  box-sizing: border-box;
+  height: 36px;
+  border-radius: 8px;
+  font-size:16px;
+  padding: 0 8px;
+}
+
+.booking-form select {
+  height: 36px;
+  border-radius: 8px;
+  font-size:16px;
+}
+
+input[type="submit"] {
+  background-color: var(--green);
+  color: white;
+  border: 0px;
+  font-size: 16px;
+  grid-column: 1/-1;
+  cursor: pointer;
+  transition: 0.15s ease all;
+  &:hover {
+    background-color: var(--yellow);
+    color: #222;
+  }
+}
+
