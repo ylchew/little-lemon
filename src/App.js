@@ -4,14 +4,17 @@ import Header from './Header'
 import Nav from './Nav'
 import Main from './Main'
 import Footer from './Footer'
+import StateProvider from './StateContext'
 
 function App() {
   return (
     <Fragment>
-      <Header></Header>
-      <Nav></Nav>
-      <Main></Main>
-      <Footer></Footer>
+      <StateProvider>
+        <Header></Header>
+        <Nav></Nav>
+        <Main></Main>
+        <Footer></Footer>
+      </StateProvider>
     </Fragment>
   );
 }

@@ -35,14 +35,14 @@ const availableTimesByDate = {
                 resolve(availableTimesByDate[date])
             }
             else{
-                reject(new Error('No available times for the selected date.'));
+                reject();
             }
         } , 1000)
     })
   }
 
   const submitAPI = (formData) => {
-    
+
     availableTimesByDate[formData.date] = availableTimesByDate[formData.date].filter(time => time !== formData.time);
 
     return new Promise((resolve, reject) => {
