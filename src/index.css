@@ -3,6 +3,16 @@
 :root {
   --green: #495e57;
   --yellow: #f4ce14;
+  --red: #EE9972;
+  --beige: #FBDABB;
+  --grey: #EDEFEE;
+  --black: #333;
+}
+
+#root {
+  background-color: #ddd;
+  height: 100vh;
+  width: 100vw;
 }
 
 .karla {
@@ -33,19 +43,27 @@ ul, li {
   padding: 0px;
 }
 
+
+
 .booking-form {
   padding: 16px;
   border-radius: 16px;
   box-shadow: 0 8px 16px -4px #0002;
   display: grid;
-  max-width: 300px;
+  max-width: 400px;
   grid-template-columns: auto auto;
   gap: 16px;
+  background-color: white;
+  margin: 32px;
+  color: var(--black);
 }
+
+  #logo {
+    grid-column: 1/-1;
+  }
 
   .booking-form > div {
     display: grid;
-    gap: 8px;
   }
 
 .booking-form label {
@@ -53,24 +71,37 @@ ul, li {
   font-size:16px;
   line-height:1.5;
   font-weight: medium;
+  margin: 0px;
 }
 
-.booking-form input {
+.booking-form input,.booking-form select {
   line-height: 36px;
   box-sizing: border-box;
-  height: 36px;
+  height: 40px;
   border-radius: 8px;
   font-size:16px;
   padding: 0 8px;
-}
-
-.booking-form select {
-  height: 36px;
-  border-radius: 8px;
+  background-color: var(--grey);
   font-size:16px;
+  border: 0px;
+  box-shadow: 0px 4px 4px -2px #3334;
 }
 
-input[type="submit"] {
+.booking-form div:has(input[name="name"]),
+.booking-form div:has(input[name="email"]) {
+  grid-column: 1/-1;
+}
+
+input:focus {
+  border-color: var(--green)
+}
+
+.booking-form > div > input:focus-visible, .booking-form > div select:focus-visible {
+  border-color: var(--green);
+  box-shadow: 0 0 0 2px var(--green);
+}
+
+button[type="submit"] {
   background-color: var(--green);
   color: white;
   border: 0px;
@@ -84,3 +115,38 @@ input[type="submit"] {
   }
 }
 
+[aria-invalid=true] {
+  border-color:
+}
+
+
+.confirmed-booking-screen {
+  font-size: 18pt;
+  font-weight: bold;
+  text-align: center;
+  display: grid;
+  background-color: var(--green);
+  grid-column: 1 / -1;
+  color: white;
+  border-radius: 16px;
+  min-height: 40pt;
+  place-content: center;
+  text-align: center;
+  padding: 32px;
+  gap: 8px;
+}
+  #booking-done {
+    height: 40pt;
+    margin: auto;
+    filter:brightness(100%);
+    padding: 4px;
+    background-color: white;
+    border-radius: 100%;
+  }
+
+@media screen and (max-width: 800px) {
+  .booking-form {
+    max-width: 100%;
+    grid-template-columns: 1fr;
+  }
+}

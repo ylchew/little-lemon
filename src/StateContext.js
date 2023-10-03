@@ -1,33 +1,19 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useState } from 'react'
 
-const StateContext = createContext({
-    stateContext: '',
-    setStateContext: () => {}
-})
+export const StateContext = createContext()
 
-export const useStateContext = () => {
-    const stateContext = useContext(StateContext)
-
-    if(stateContext === undefined) {
-        throw new Error("useStateContext was used outside of its Provider")
-    }
-
-    return stateContext
-
-}
-
-export default function StateProvider({children}) {
+export const StateProvider = ({children}) => {
 
     const todayDate = new Date().toISOString().slice(0, 10)
-    const [ currentState, setCurrentState ] = useState({
+    const [ state, setState ] = useState({
+        currentDate: todayDate,
         today: todayDate
     })
 
     return(
-        <StateContext.Provider value={{ currentState, setCurrentState }}>
+        <StateContext.Provider value={[ state, setState ]}>
             {children}
         </StateContext.Provider>
     )
 
 }
-

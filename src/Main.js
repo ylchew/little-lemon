@@ -1,30 +1,49 @@
-import { useState, useReducer, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useReducer, useEffect, useContext } from "react";
+import { createBrowserRouter, Router, RouterProvider } from "react-router-dom";
 import { fetchAPI, submitAPI } from "./mockAPI";
 import BookingForm from "./BookingForm"
-import updateTimes from "./Hooks";
+import { StateContext } from "./StateContext";
+import ConfirmedBooking from "./ConfirmedBooking"
 
 function Main() {
     // const navigate = useNavigate()
+    const [state, setState] = useContext(StateContext)
     const today = new Date().toISOString().slice(0, 10)
-    const [initializeTimes, reInitializeTimes] = useState(['17:00','18:00','19:00','20:00','21:00','22:00'])
-    const [updateDate, newUpdateDate] = useState(today)
+    const initializeTimes = {currentDate: ['16:00','17:00','18:00','19:00','20:00','21:00','22:00']}
 
-    useEffect(()=> {
-        let _updatedArray = []
+
+
+    useEffect(()=>{
+
         fetchAPI(today)
         .then((response) => {
-            _updatedArray = [...response]
+            console.log(`update_date action executed: retrieved ${response}`)
+            setState({...state, availableTimes: [...response]})
         })
-        reInitializeTimes(_updatedArray)
+        .catch(error => {
+            setState({...state, availableTimes: [...initializeTimes.currentDate]})
+        })
+
     },[])
 
-    const [availableTimes, updateAvailableTimes] = useReducer(updateTimes, initializeTimes)
+    const updateTimes = ( state, action ) => {
 
-    useEffect(()=> {
-        console.log(`initializeTimes is updated`)
-        console.log(initializeTimes)
-     },[initializeTimes])
+        switch(action.type) {
+            case 'update_date' : {
+                fetchAPI(action.dateToUpdate)
+                .then((response) => {
+                    console.log(`update_date action executed: retrieved ${response}`)
+                    setState({...state, availableTimes: [...response]})
+                })
+                .catch(error => {
+                    setState({...state, availableTimes: [...initializeTimes.currentDate]})
+                })
+            }
+        }
+
+    }
+
+    const [availableTimes, updateAvailableTimes] = useReducer(updateTimes, initializeTimes)
 
     const submitForm = (formData) => {
         if(submitAPI(formData)) {
@@ -32,9 +51,22 @@ function Main() {
         }
     }
 
+    const  router = createBrowserRouter([
+        {
+            path: "/",
+            element: <BookingForm submitForm={submitForm} updateAvailableTimes={updateAvailableTimes} />,
+            children: [
+                {
+                    path: "confirmed-booking",
+                    element: <ConfirmedBooking/>
+                }
+            ]
+        },
+    ])
+
     return(
         <main>
-            <BookingForm  availableTimes={availableTimes} submitForm={submitForm} updateAvailableTimes={updateAvailableTimes} />
+            <RouterProvider router={router} />
         </main>
     )
 }
