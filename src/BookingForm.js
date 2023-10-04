@@ -136,7 +136,7 @@ function BookingForm({availableTimes, submitForm, updateAvailableTimes}) {
           <form
               className="booking-form" onSubmit={formik.handleSubmit}
           >
-            <img src={image} id="logo" />
+            <img src={image} id="logo" alt="little lemon logo"/>
             {
               (state.formStatus === 'success') ? <Outlet/> :
               <FormikForm/>
